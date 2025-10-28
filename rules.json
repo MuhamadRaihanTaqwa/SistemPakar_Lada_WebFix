@@ -1,0 +1,62 @@
+[
+  {
+    "id": "R1",
+    "if": ["daun_layu", "batang_membusuk", "akar_rambut_rusak"],
+    "then": "busuk_akar",
+    "cf": 0.85
+  },
+  {
+    "id": "R2",
+    "if": ["bercak_hitam_pada_daun", "kulit_batang_hitam", "pembuluh_cokelat"],
+    "then": "busuk_pangkal",
+    "cf": 0.80
+  },
+  {
+    "id": "R3",
+    "if": ["daun_kuning", "pertumbuhan_terhambat", "daun_gugur"],
+    "then": "kuning_daun",
+    "cf": 0.75
+  },
+  {
+    "id": "R4",
+    "if": ["ranting_tidak_tumbuh", "jamur_cokelat_pada_ranting"],
+    "then": "busuk_tunggul",
+    "cf": 0.70
+  },
+  {
+    "id": "R5",
+    "if": ["daun_pucuk_mosaic", "tanaman_kerdil", "buah_kecil", "tunas_pendek"],
+    "then": "kerdil_keriting",
+    "cf": 0.80
+  },
+  {
+    "id": "R6",
+    "if": ["bercak_hitam_daun", "bekas_gigitan_batang", "akar_rusak"],
+    "then": "ganggang_pirang",
+    "cf": 0.75
+  },
+  {
+    "id": "R7",
+    "if": ["daun_layu", "batang_membusuk"],
+    "then": "busuk_akar",
+    "cf": 0.70
+  },
+  {
+    "id": "R8",
+    "if": ["daun_kuning", "akar_rusak"],
+    "then": "kuning_daun",
+    "cf": 0.65
+  },
+  {
+    "id": "R9",
+    "if": ["buah_kecil", "tanaman_tidak_berdaun"],
+    "then": "kerdil_keriting",
+    "cf": 0.75
+  },
+  {
+    "id": "R10",
+    "if": ["bercak_hitam_pada_daun", "ranting_tidak_tumbuh"],
+    "then": "ganggang_pirang",
+    "cf": 0.70
+  }
+]
