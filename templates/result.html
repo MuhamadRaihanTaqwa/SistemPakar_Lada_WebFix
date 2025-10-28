@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Diagnosa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 Hasil Diagnosa</h1>
+
+        {% if hasil %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Penyakit</th>
+                    <th>Tingkat Keyakinan (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in hasil %}
+                <tr>
+                    <td>{{ h.penyakit }}</td>
+                    <td>{{ "%.1f"|format(h.cf) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="chart-box">
+            <canvas id="cfChart"></canvas>
+        </div>
+
+        <script>
+    const labels = JSON.parse('{{ labels | safe }}');
+    const dataValues = JSON.parse('{{ values | safe }}');
+
+    const ctx = document.getElementById('cfChart').getContext('2d');
+    console.log("Labels:", labels);
+console.log("Data Values:", dataValues);
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Tingkat Keyakinan (%)',
+                data: dataValues,
+                backgroundColor: [
+                    'rgba(34, 211, 238, 0.7)',
+                    'rgba(99, 102, 241, 0.7)',
+                    'rgba(52, 211, 153, 0.7)',
+                    'rgba(251, 191, 36, 0.7)',
+                    'rgba(244, 63, 94, 0.7)'
+                ],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
+
+        {% else %}
+        <p>Tidak ada penyakit yang cocok dengan gejala yang dipilih.</p>
+        {% endif %}
+
+        {% if hasil %}
+    <table>
+        <thead>
+            <tr>
+                <th>Penyakit</th>
+                <th>Tingkat Keyakinan (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in hasil %}
+            <tr>
+                <td>{{ h.penyakit }}</td>
+                <td>{{ "%.1f"|format(h.cf) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="chart-box">
+        <canvas id="cfChart"></canvas>
+    </div>
+
+    <!-- Tambahkan bagian penjelasan -->
+    <div class="info-box">
+        <h2>🩺 Penjelasan dan Solusi</h2>
+        {% for h in hasil %}
+        <div class="info-item">
+            <h3>{{ h.penyakit }}</h3>
+            <p><strong>Deskripsi:</strong> {{ h.deskripsi }}</p>
+            <p><strong>Solusi:</strong> {{ h.solusi }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% if kesimpulan %}
+<div class="kesimpulan-box">
+    <h2>🧾 Kesimpulan</h2>
+    <p>{{ kesimpulan }}</p>
+</div>
+{% endif %}
+
+{% endif %}
+
+        <a href="/" class="btn">⬅️ Kembali</a>
+    </div>
+</body>
+</html>
